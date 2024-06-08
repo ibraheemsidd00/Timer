@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer</title>
+<style>
+    body {
+      background-color: black;
+    }
+  
+    .timer-container {
+      text-align: center;
+      color: white;
+      font-size: 100px;
+      margin-top: 20px;
+      background-color: black;
+      height: 55px;
+    }
+    .b{
+        color: white;
+        text-align: center;
+        justify-content: center;
+        font-size: xx-large;
+        margin-top: 150px;
+    }
+  </style>
+  
+</head>
+<body>
+
+    <div class="b">
+        <h1>Timer</h1>
+    </div>
+
+<div class="timer-container">
+  <div id="timer">00:00:00</div>
+  <button onclick="startTimer()">Start</button>
+  <button onclick="stopTimer()">Stop</button>
+  <button onclick="resetTimer()">Reset</button>
+</div>
+
+<script>
+  let timerInterval;
+  let seconds = 0;
+  let minutes = 0;
+  let hours = 0;
+
+  function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+
+  function updateTimer() {
+    seconds++;
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+    }
+    if (minutes === 60) {
+      minutes = 0;
+      hours++;
+    }
+    document.getElementById('timer').textContent = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
+  }
+
+  function stopTimer() {
+    clearInterval(timerInterval);
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    document.getElementById('timer').textContent = '00:00:00';
+  }
+
+  function formatTime(time) {
+    return time < 10 ? '0' + time : time;
+  }
+</script>
+
+</body>
+</html>
